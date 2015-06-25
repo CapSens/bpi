@@ -8,16 +8,16 @@ Gem::Specification.new do |s|
   s.name        = "bpi"
   s.version     = Bpi::VERSION
   s.authors     = ["Samy KACIMI"]
-  s.email       = ["samy.kacimi@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Bpi."
-  s.description = "TODO: Description of Bpi."
-  s.license     = "MIT"
+  s.email       = ["samy@capsens.eu"]
+  s.homepage    = "http://www.capsens.eu"
+  s.summary     = "XML builder"
+  s.description = "XML builder for Tous Nos Projets"
+  s.license     = "Property"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.2.1"
+  s.add_dependency "rails", ">= 4.0.0"
 
   s.add_development_dependency "sqlite3"
 end

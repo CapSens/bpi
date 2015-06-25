@@ -21,6 +21,14 @@ module Dummy
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.bpi.partenaire = 'Dummy'
+    config.bpi.reference_partenaire = '010'
+    config.bpi.dictionary = {
+      titre: :title,
+      ville: :city,
+      date_debut_collecte: :create_at
+      montant_recherche: :wanted_amount
+    }
   end
 end
 
