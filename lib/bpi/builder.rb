@@ -4,13 +4,17 @@ module Bpi
 		Rails.application.config.bpi.dictionary
 	end
 
+	# data must be hash {url: 'https://toto.com/projet/', photo: 'https://toto.com/media/12'}
+
+
 	def xml_builder(object)
+		data = object.to_bpi_data
 		builder = Nokogiri::XML::Builder.new do |xml|
 		  xml.partenaire {
 		    xml.projet {
 		    	xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 		    	xml.date_export Rails.application.config.bpi.date_export
-		    	xml.reference_projet ''
+		    	xml.reference_projet object.send bpi_dictionary[:reference_projet]
 		    	xml.impact_social Rails.application.config.bpi.impact_social
 		    	xml.impact_environnemental Rails.application.config.bpi.impact_environnemental
 		    	xml.impact_culturel Rails.application.config.bpi.impact_culturel
@@ -27,12 +31,12 @@ module Bpi
 		  		xml.mode_financement Rails.application.config.bpi.mode_financement
 		  		xml.type_porteur_projet Rails.application.config.bpi.type_porteur_projet
 		  		xml.qualif_ESS Rails.application.config.bpi.qualif_ESS
-		  		xml.code_postal bpi_dictionary[:code_postal]
+		  		xml.code_postal object.send bpi_dictionary[:code_postal]
 		  		xml.ville object.send bpi_dictionary[:ville]
 		  		xml.titre object.send bpi_dictionary[:titre]
 		  		xml.description object.send bpi_dictionary[:description]
-		  		xml.url ''
-		  		xml.url_photo ''
+		  		xml.url data[:url]
+		  		xml.url_photo data[:photo]
 		  		xml.date_debut_collecte object.send bpi_dictionary[:date_debut_collecte]
 		  		xml.date_fin_collecte object.send bpi_dictionary[:date_debut_collecte]
 		  		xml.montant_recherche object.send bpi_dictionary[:montant_recherche]

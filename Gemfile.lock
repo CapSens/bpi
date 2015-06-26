@@ -2,7 +2,8 @@ PATH
   remote: .
   specs:
     bpi (0.0.1)
-      rails (~> 4.2.1)
+      nokogiri
+      rails (>= 4.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -103,6 +104,7 @@ PLATFORMS
 
 DEPENDENCIES
   bpi!
+  nokogiri
   sqlite3
 
 BUNDLED WITH
