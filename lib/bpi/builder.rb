@@ -38,7 +38,7 @@ module Bpi
 			  		xml.description object.send bpi_dictionary[:description]
 			  		xml.url data[:url]
 			  		xml.url_photo data[:photo]
-			  		fullstart= object.send bpi_dictionary[:date_debut_collecte]
+			  		fullstart = object.send bpi_dictionary[:date_debut_collecte]
 			  		xml.date_debut_collecte fullstart.strftime("%F")
 			  		fullend = object.send bpi_dictionary[:date_fin_collecte]
 			  		if fullend.to_s != ''
@@ -57,7 +57,8 @@ module Bpi
 		  xml.partenaire {
 				objects.map do |object|
 					data = object.to_bpi_data
-					if ended?
+					ended = object.send bpi_dictionary[:time_ended?]
+					if !ended
 			    	xml.projet {
 			    		xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 			    		xml.date_export Rails.application.config.bpi.date_export
