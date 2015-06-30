@@ -33,7 +33,10 @@ module Bpi
 			  		xml.type_porteur_projet Rails.application.config.bpi.type_porteur_projet
 			  		xml.qualif_ESS Rails.application.config.bpi.qualif_ESS
 			  		xml.code_postal object.send bpi_dictionary[:code_postal]
-			  		xml.ville object.send bpi_dictionary[:ville]
+			  		villexml = xml.ville object.send bpi_dictionary[:ville]
+			  		if villexml.to_s != ''
+			  			xml.ville object.send bpi_dictionary[:ville]
+			  		end
 			  		xml.titre object.send bpi_dictionary[:titre]
 			  		xml.description object.send bpi_dictionary[:description]
 			  		xml.url data[:url]
