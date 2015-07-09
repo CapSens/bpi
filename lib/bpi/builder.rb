@@ -14,7 +14,7 @@ module Bpi
 					data = object.to_bpi_data
 			    xml.projet {
 			    	xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
-			    	xml.date_export Rails.application.config.bpi.date_export
+			    	xml.date_export Time.now.strftime("%Y-%m-%d")
 			    	xml.reference_projet object.send bpi_dictionary[:reference_projet]
 			    	xml.impact_social Rails.application.config.bpi.impact_social
 			    	xml.impact_environnemental Rails.application.config.bpi.impact_environnemental
