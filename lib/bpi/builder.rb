@@ -90,8 +90,9 @@ module Bpi
 						end
 
 			  		xml.code_postal object.send bpi_dictionary[:code_postal]
-			  		villexml = xml.ville object.send bpi_dictionary[:ville]
-			  		if villexml.to_s != ''
+
+						ville = object.send bpi_dictionary[:ville] rescue nil
+			  		if ville
 			  			xml.ville object.send bpi_dictionary[:ville]
 			  		end
 
