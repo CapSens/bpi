@@ -6,7 +6,7 @@ module Bpi
 
 	# data must be hash {url: 'https://toto.com/projet/', photo: 'https://toto.com/media/12'}
 
-
+	# XML Builder for ALL projects
 	def xml_history_builder(objects)
 		builder = Nokogiri::XML::Builder.new do |xml|
 		  xml.partenaire {
@@ -16,19 +16,51 @@ module Bpi
 			    	xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 			    	xml.date_export Time.now.strftime("%Y-%m-%d")
 			    	xml.reference_projet object.send bpi_dictionary[:reference_projet]
-			    	xml.impact_social Rails.application.config.bpi.impact_social
-			    	xml.impact_environnemental Rails.application.config.bpi.impact_environnemental
-			    	xml.impact_culturel Rails.application.config.bpi.impact_culturel
-			    	xml.impact_eco Rails.application.config.bpi.impact_eco
+
+						# If the impact_social attribute does not exists in the dictionary,
+						# uses the value you defined manually. Note that two different projects
+						# may have different impacts. It is then preferable for this attribute and
+						# all the other mandatory ones to be present in the dictionary
+
+						impact_social = object.send bpi_dictionary[:impact_social] rescue nil
+						if impact_social
+							xml.impact_social object.send bpi_dictionary[:impact_social]
+						else
+							xml.impact_social Rails.application.config.bpi.impact_social
+						end
+
+						impact_environnemental = object.send bpi_dictionary[:impact_environnemental] rescue nil
+						if impact_environnemental
+							xml.impact_environnemental object.send bpi_dictionary[:impact_environnemental]
+						else
+							xml.impact_environnemental Rails.application.config.bpi.impact_environnemental
+						end
+
+						impact_culturel = object.send bpi_dictionary[:impact_culturel] rescue nil
+						if impact_culturel
+							xml.impact_culturel object.send bpi_dictionary[:impact_culturel]
+						else
+							xml.impact_culturel Rails.application.config.bpi.impact_culturel
+						end
+
+						impact_eco = object.send bpi_dictionary[:impact_eco] rescue nil
+						if impact_eco
+							xml.impact_eco object.send bpi_dictionary[:impact_eco]
+						else
+							xml.impact_eco Rails.application.config.bpi.impact_eco
+						end
+
 			  		xml.categorie {
 			  			xml.categorie1 Rails.application.config.bpi.categorie1
 			  			if Rails.application.config.bpi.categorie2 != ''
 			  				xml.categorie2 Rails.application.config.bpi.categorie2
 			  			end
 			  		}
+
 			  		if Rails.application.config.bpi.mots_cles_nomenclature_operateur != ''
 			  			xml.mots_cles_nomenclature_operateur Rails.application.config.bpi.mots_cles_nomenclature_operateur
 			  		end
+
 			  		xml.mode_financement Rails.application.config.bpi.mode_financement
 			  		xml.type_porteur_projet Rails.application.config.bpi.type_porteur_projet
 			  		xml.qualif_ESS Rails.application.config.bpi.qualif_ESS
@@ -55,6 +87,7 @@ module Bpi
 		end
 	end
 
+	# XML Builder for ongoing projects
 	def xml_current_builder(objects)
 		builder = Nokogiri::XML::Builder.new do |xml|
 		  xml.partenaire {
