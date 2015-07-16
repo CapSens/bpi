@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = "bpi"
   spec.version       = Bpi::VERSION
   spec.authors       = ["Samy KACIMI"]
-  spec.email         = ["samy.kacimi@gmail.com"]
+  spec.email         = ["samy@capsens.eu"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{XML project export for BPI}
+  spec.description   = %q{XML exporter for the Tous Nos Projets website}
+  spec.homepage      = ""
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
