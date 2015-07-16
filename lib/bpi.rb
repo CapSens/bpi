@@ -1,5 +1,7 @@
 require "bpi/version"
+require 'nokogiri' if defined? Rails
+require "bpi/railtie" if defined? Rails
+require "bpi/builder"
 
 module Bpi
-  # Your code goes here...
 end
