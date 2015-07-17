@@ -10,7 +10,7 @@ Two streams are available :
 In your **Gemfile**
 
 ```
-  gem 'bpi', git: "git@projects.capsens.eu:rails-plugins/bpi.git", branch: "samy-dev"
+  gem 'bpi', git: "git@projects.capsens.eu:rails-plugins/bpi.git"
 ```
 
 In **app/controllers/home_controller.rb** :
