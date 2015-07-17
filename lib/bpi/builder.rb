@@ -12,11 +12,11 @@ module Bpi
 		  xml.partenaire {
 				objects.map do |object|
 					data = object.to_bpi_data
-					xml.lol "TEST"
 					accept = object.send bpi_dictionary[:accept?]
 					if accept == true
 			    	xml.projet {
 			    		xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
+							xml.lol "TEST"
 			    		xml.date_export Time.now.strftime("%Y-%m-%d")
 			    		xml.reference_projet object.send bpi_dictionary[:reference_projet]
 							xml.impact_social get_tag(object, "impact_social")
