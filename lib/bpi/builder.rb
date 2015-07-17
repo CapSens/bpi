@@ -7,7 +7,7 @@ module Bpi
 	# data must be hash {url: 'https://toto.com/projet/', photo: 'https://toto.com/media/12'}
 
 	# XML Builder for ALL projects
-	def xml_history_builder(objects, xml_stream)
+	def xml_builder(objects, xml_stream)
 		builder = Nokogiri::XML::Builder.new do |xml|
 		  xml.partenaire {
 				objects.map do |object|
