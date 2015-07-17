@@ -13,7 +13,7 @@ module Bpi
 		builder = Nokogiri::XML::Builder.new do |xml|
 		  xml.partenaire {
 				objects.map do |object|
-					data = object.to_bpi_data
+					data = object.get_project_data
 					if xml_stream == "history" && object.try(bpi_dictionary[:accept?]) == true
 			    	xml.projet {
 			    		xml.reference_partenaire Rails.application.config.bpi.reference_partenaire

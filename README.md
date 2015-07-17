@@ -35,6 +35,22 @@ def current
 end
 ```
 
+In **app/models/project.rb**
+
+You have to set the get_project_data method, which will contain a hash with the url an cover photo url of your project.
+The two keys **must** be called **url** and **photo**.
+
+For instance, Fundovino has the following paths.
+
+```ruby
+def get_project_data
+  {
+    url: "https://fundovino.com/fr/#{ id }-#{ to_s.parameterize }",
+    photo: "https://fundovino.com#{get_image_projects_path id: id, attribute: 'project_id'}"
+  }
+end
+```
+
 In **config/routes.rb** :
 
 ```ruby
@@ -102,6 +118,7 @@ config.bpi.dictionary = {
   montant_collecte: :collected_amount,
   code_postal: :zip_code,
   time_ended?: :time_ended?,
+  accept?: :accept?
 }
 ```
 
