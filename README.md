@@ -1,41 +1,110 @@
-# Bpi
+#Bpi XML Builder
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bpi`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem generates an XML file of all your website's projects for tousnosprojets.bpifrance.fr
 
 ## Installation
 
-Add this line to your application's Gemfile:
+In your **Gemfile**
 
-```ruby
-gem 'bpi'
+```
+  gem 'bpi', git: "git@projects.capsens.eu:rails-plugins/bpi.git", branch: "samy-dev"
 ```
 
-And then execute:
+In **app/controllers/home_controller.rb** :
 
-    $ bundle
+```ruby
+include Bpi
+.
+.
+.
+def history
+  @projects = xml_history_builder(YourProjectModel.all)
+  send_data @projects.to_xml,
+    :type => "text/xml; charset=UTF-8;",
+    :disposition => "attachement; filename=#{Rails.application.config.bpi.reference_partenaire}_historique.xml"
+end
 
-Or install it yourself as:
+def current
+  @projects = xml_current_builder(YourProjectModel.all)
+  send_data @projects.to_xml,
+    :type => "text/xml; charset=UTF-8;",
+    :disposition => "attachement; filename=#{Rails.application.config.bpi.reference_partenaire}.xml"
+end
+```
 
-    $ gem install bpi
+In **config/routes.rb** :
 
-## Usage
+```ruby
+get 'bpi/xml/historique' => 'home#history'
+get 'bpi/xml/current' => 'home#current'
+```
 
-TODO: Write usage instructions here
+In **config/application.rb** :
 
-## Development
+```ruby
+config.bpi.reference_partenaire = 'your reference partenaire'
+```
+If you don't know the partner reference for your website, send a mail to sebastien.ramos@smile.fr
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake false` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+You also have to set a dictionary, because each attribute's name may be different between two given projects. Some are mandatory,
+some are optinal. Here is the list :
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+* reference_projet : the id of your project
+* impact_social : OUI / NON
+* impact_environnemental : OUI / NON
+* impact_culturel : OUI / NON
+* impact_eco : OUI / NON
+Note that your project cannot have more than two impacts, but must have a least one.
+* categorie1 (optional)
+* categorie2 (optional)
+* mots_cles_nomenclature_operateur (optional) : key words
+* mode_financement (mandatory) : DON, DOC, PRE, PRR, ACT, OBL
+⋅⋅* DON => Don sans contrepartie
+⋅⋅* DOC => Don avec contrepartie
+⋅⋅* PRE => Prêt non rémunéré
+⋅⋅* PRR => Prêt rémunéré
+⋅⋅* ACT => Actions
+⋅⋅* OBL => Obligations
+* type_porteur_projet (mandatory) : ENT, ASS, PAR, COL
+⋅⋅* ENT => Entreprise
+⋅⋅* ASS => Association
+⋅⋅* PAR => Particulier
+⋅⋅* COL => Collectivités locales
+* qualif_ESS (mandatory) : OUI / NON
+* code_postal (mandatory)
+* ville (optional)
+* titre (mandatory)
+* description (mandatory)
+* url (mandatory)
+* url_photo (mandatory)
+* date_debut_collecte (mandatory) : YYYY-MM-DD
+* date_fin_collecte (mandatory) : YYYY-MM-DD
+* montant_recherche (mandatory)
+* montant_collecte (mandatory)
 
-## Contributing
+For instance, Fundovino uses the dictionary below
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bpi.
+```ruby
+config.bpi.dictionary = {
+  reference_projet: :id,
+  titre: :title_fr,
+  ville: :localisation,
+  description: :presentation,
+  date_debut_collecte: :created_at,
+  date_fin_collecte: :end_date,
+  montant_recherche: :amount,
+  montant_collecte: :collected_amount,
+  code_postal: :zip_code,
+  time_ended?: :time_ended?,
+}
+```
 
+If one of the attributes is not present in your database (and thus cannot put it in the dictionary) like above,
+you can set it manually like this :
 
-## License
-
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
+```ruby
+config.bpi.impact_social = 'NON'
+config.bpi.impact_environnemental = 'OUI'
+config.bpi.impact_culturel = 'NON'
+config.bpi.impact_eco = 'OUI'
+```
