@@ -1,6 +1,9 @@
-#Bpi XML Builder
+# Bpi XML Builder
 
-This gem generates an XML file of all your website's projects for tousnosprojets.bpifrance.fr
+This gem generates an XML file of your website's projects for tousnosprojets.bpifrance.fr
+Two streams are available :
+- History (yourwebsite.com/bpi/xml/historique) : Downloads a file containing all projects.
+- Current (yourwebsite.com/bpi/xml/current) : Downloads a file containing all ongoing projects.
 
 ## Installation
 
