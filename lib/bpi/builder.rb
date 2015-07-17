@@ -7,13 +7,12 @@ module Bpi
 	# data must be hash {url: 'https://toto.com/projet/', photo: 'https://toto.com/media/12'}
 
 	# XML Builder for ALL projects
-	def xml_history_builder(objects)
+	def xml_history_builder(objects, xml_stream)
 		builder = Nokogiri::XML::Builder.new do |xml|
 		  xml.partenaire {
 				objects.map do |object|
 					data = object.to_bpi_data
-					accept = object.send bpi_dictionary[:accept?]
-					if accept == true
+					if xml_stream == "history" && object.try(bpi_dictionary[:accept?]) == true
 			    	xml.projet {
 			    		xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 							xml.lol "TEST"
@@ -47,20 +46,7 @@ module Bpi
 			  			xml.montant_recherche object.send bpi_dictionary[:montant_recherche]
 			  			xml.montant_collecte object.send bpi_dictionary[:montant_collecte]
 						}
-					end
-				end
-		  }
-		end
-	end
-
-	# XML Builder for ongoing projects
-	def xml_current_builder(objects)
-		builder = Nokogiri::XML::Builder.new do |xml|
-		  xml.partenaire {
-				objects.map do |object|
-					data = object.to_bpi_data
-					ended = object.send bpi_dictionary[:time_ended?]
-					if !ended
+					elsif xml_stream == "current" && object.try(bpi_dictionary[:time_ended?]) == false
 						xml.projet {
 				    	xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 				    	xml.date_export Time.now.strftime("%Y-%m-%d")
