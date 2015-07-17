@@ -59,17 +59,18 @@ Note that your project cannot have more than two impacts, but must have a least 
 * categorie2 (optional)
 * mots_cles_nomenclature_operateur (optional) : key words
 * mode_financement (mandatory) : DON, DOC, PRE, PRR, ACT, OBL
-⋅⋅* DON => Don sans contrepartie
-⋅⋅* DOC => Don avec contrepartie
-⋅⋅* PRE => Prêt non rémunéré
-⋅⋅* PRR => Prêt rémunéré
-⋅⋅* ACT => Actions
-⋅⋅* OBL => Obligations
+DON => Don sans contrepartie
+DOC => Don avec contrepartie
+PRE => Prêt non rémunéré
+PRR => Prêt rémunéré
+ACT => Actions
+OBL => Obligations
+
 * type_porteur_projet (mandatory) : ENT, ASS, PAR, COL
-⋅⋅* ENT => Entreprise
-⋅⋅* ASS => Association
-⋅⋅* PAR => Particulier
-⋅⋅* COL => Collectivités locales
+ENT => Entreprise
+ASS => Association
+PAR => Particulier
+COL => Collectivités locales
 * qualif_ESS (mandatory) : OUI / NON
 * code_postal (mandatory)
 * ville (optional)
@@ -81,6 +82,8 @@ Note that your project cannot have more than two impacts, but must have a least 
 * date_fin_collecte (mandatory) : YYYY-MM-DD
 * montant_recherche (mandatory)
 * montant_collecte (mandatory)
+* time_ended? : your method that checks if the project has ended
+* accept? : your method that checks if the project has been accepted
 
 For instance, Fundovino uses the dictionary below
 
@@ -103,8 +106,12 @@ If one of the attributes is not present in your database (and thus cannot put it
 you can set it manually like this :
 
 ```ruby
+.
+.
 config.bpi.impact_social = 'NON'
 config.bpi.impact_environnemental = 'OUI'
 config.bpi.impact_culturel = 'NON'
 config.bpi.impact_eco = 'OUI'
+.
+.
 ```
