@@ -17,7 +17,6 @@ module Bpi
 					if xml_stream == "history" && object.try(bpi_dictionary[:accept?]) == true
 			    	xml.projet {
 			    		xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
-							xml.lol "TEST"
 			    		xml.date_export Time.now.strftime("%Y-%m-%d")
 			    		xml.reference_projet object.send bpi_dictionary[:reference_projet]
 							xml.impact_social get_tag(object, "impact_social")
