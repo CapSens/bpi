@@ -1,5 +1,9 @@
 module Bpi
 
+  # The get_tag method takes two paramters : an object (here, the project), and a tag name.
+  # It will search if that tag value is defined in the dictionary of your application, and if not, will
+  # take the value you defined manually (see README.md)
+  
   def get_tag(object, tag)
 		case tag
 		when "impact_social"

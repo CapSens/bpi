@@ -4,9 +4,11 @@ module Bpi
 		Rails.application.config.bpi.dictionary
 	end
 
-	# data must be hash {url: 'https://toto.com/projet/', photo: 'https://toto.com/media/12'}
+	# XML Builder
+	# The xml_stream parameter corresponds to which stream you want
+	# - history : XML stream of all projects
+	# - current : XML stream of ongoing projects
 
-	# XML Builder for ALL projects
 	def xml_builder(objects, xml_stream)
 		builder = Nokogiri::XML::Builder.new do |xml|
 		  xml.partenaire {
