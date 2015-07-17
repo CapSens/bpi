@@ -9,10 +9,10 @@ module Bpi
 	# XML Builder for ALL projects
 	def xml_history_builder(objects)
 		builder = Nokogiri::XML::Builder.new do |xml|
-			xml.lol "TEST"
 		  xml.partenaire {
 				objects.map do |object|
 					data = object.to_bpi_data
+					xml.lol "TEST"
 					accept = object.send bpi_dictionary[:accept?]
 					if accept == true
 			    	xml.projet {
