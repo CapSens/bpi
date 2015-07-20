@@ -19,14 +19,14 @@ module Bpi
 			    		xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 			    		xml.date_export Time.now.strftime("%Y-%m-%d")
 			    		xml.reference_projet object.send bpi_dictionary[:reference_projet]
-							xml.impact_social get_tag(object, "impact_social")
-							xml.impact_environnemental get_tag(object, "impact_environnemental")
-							xml.impact_culturel get_tag(object, "impact_culturel")
-							xml.impact_eco get_tag(object, "impact_eco")
-							if !get_tag(object, "categorie1").nil?
+							xml.impact_social get_impact(object, "impact_social")
+							xml.impact_environnemental get_impact(object, "impact_environnemental")
+							xml.impact_culturel get_impact(object, "impact_culturel")
+							xml.impact_eco get_impact(object, "impact_eco")
+							if !get_category(object, "categorie1").nil?
 			  				xml.categorie {
-									xml.categorie1 get_tag(object, "categorie1")
-									xml.categorie2 get_tag(object, "categorie2") unless get_tag(object, "categorie2").nil?
+									xml.categorie1 get_category(object, "categorie1")
+									xml.categorie2 get_category(object, "categorie2") unless get_category(object, "categorie2").nil?
 			  				}
 							end
 							xml.mots_cles_nomenclature_operateur get_tag(object, "mots_cles_op") unless get_tag(object, "mots_cles_op").nil?
@@ -52,14 +52,14 @@ module Bpi
 				    	xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 				    	xml.date_export Time.now.strftime("%Y-%m-%d")
 				    	xml.reference_projet object.send bpi_dictionary[:reference_projet]
-							xml.impact_social get_tag(object, "impact_social")
-							xml.impact_environnemental get_tag(object, "impact_environnemental")
-							xml.impact_culturel get_tag(object, "impact_culturel")
-							xml.impact_eco get_tag(object, "impact_eco")
-							if !get_tag(object, "categorie1").nil?
+							xml.impact_social get_impact(object, "impact_social")
+							xml.impact_environnemental get_impact(object, "impact_environnemental")
+							xml.impact_culturel get_impact(object, "impact_culturel")
+							xml.impact_eco get_impact(object, "impact_eco")
+							if !get_category(object, "categorie1").nil?
 				  			xml.categorie {
-									xml.categorie1 get_tag(object, "categorie1")
-									xml.categorie2 get_tag(object, "categorie2") unless get_tag(object, "categorie2").nil?
+									xml.categorie1 get_category(object, "categorie1")
+									xml.categorie2 get_category(object, "categorie2") unless get_category(object, "categorie2").nil?
 				  			}
 							end
 							xml.mots_cles_nomenclature_operateur get_tag(object, "mots_cles_op") unless get_tag(object, "mots_cles_op").nil?
