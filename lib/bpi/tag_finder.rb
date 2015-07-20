@@ -42,15 +42,15 @@ module Bpi
   def get_category(object, category)
     case category
     when "categorie1"
-  		if object.try(bpi_dictionary[:categorie1]).nil? == false && object.try(bpi_dictionary[:categorie1]).is_a?(Hash) == false
+  		if !object.try(bpi_dictionary[:categorie1]).nil? && !object.try(bpi_dictionary[:categorie1]).is_a?(Hash)
         object.send bpi_dictionary[:categorie1]
-      elsif object.try(bpi_dictionary[:categorie1]).nil? == false && object.try(bpi_dictionary[:categorie1]).is_a?(Hash) then
+      elsif !object.try(bpi_dictionary[:categorie1]).nil? && object.try(bpi_dictionary[:categorie1]).is_a?(Hash) then
         object.send bpi_dictionary[:categorie1][:categorie1]
   		elsif Rails.application.config.bpi.categorie1.present?
         Rails.application.config.bpi.categorie1
   		end
   	when "categorie2"
-      if object.try(bpi_dictionary[:categorie2]).nil? == false && object.try(bpi_dictionary[:categorie2]).is_a?(Hash) == false
+      if !object.try(bpi_dictionary[:categorie2]).nil? && !object.try(bpi_dictionary[:categorie2]).is_a?(Hash)
   			object.send bpi_dictionary[:categorie2]
       elsif !object.try(bpi_dictionary[:categorie2]).nil? && object.try(bpi_dictionary[:categorie2]).is_a?(Hash) then
         object.send bpi_dictionary[:categorie2][:categorie2]
@@ -65,9 +65,9 @@ module Bpi
   def get_tag(object, tag)
 		case tag
 		when "mots_cles_op"
-      if object.try(bpi_dictionary[:mots_cles_op]).nil? == false && object.try(bpi_dictionary[:mots_cles_op]).is_a?(Hash) == false
+      if !object.try(bpi_dictionary[:mots_cles_op]).nil? && !object.try(bpi_dictionary[:mots_cles_op]).is_a?(Hash)
         object.send bpi_dictionary[:mots_cles_op]
-      elsif object.try(bpi_dictionary[:mots_cles_op]).nil? == false && object.try(bpi_dictionary[:mots_cles_op]).is_a?(Hash) then
+      elsif !object.try(bpi_dictionary[:mots_cles_op]).nil? && object.try(bpi_dictionary[:mots_cles_op]).is_a?(Hash) then
         object.send bpi_dictionary[:mots_cles_op][:mots_cles_op]
       elsif Rails.application.config.bpi.mots_cles_op.present?
         Rails.application.config.bpi.mots_cles_op
@@ -82,16 +82,16 @@ module Bpi
       end
 		when "qualif_ESS"
       if object.try(bpi_dictionary[:qualif_ESS]).nil?
-        Rails.application.config.bpi.mode_financement
+        Rails.application.config.bpi.qualif_ESS
       elsif object.try(bpi_dictionary[:qualif_ESS]).is_a? Hash
         object.send bpi_dictionary[:qualif_ESS][:qualif_ESS]
       else
         object.send bpi_dictionary[:qualif_ESS]
       end
 		when "ville"
-      if object.try(bpi_dictionary[:ville]).nil? == false && object.try(bpi_dictionary[:ville]).is_a?(Hash) == false
+      if !object.try(bpi_dictionary[:ville]).nil? && !object.try(bpi_dictionary[:ville]).is_a?(Hash)
 			  object.send bpi_dictionary[:ville]
-      elsif object.try(bpi_dictionary[:ville]).nil? == false && object.try(bpi_dictionary[:ville]).is_a?(Hash) then
+      elsif !object.try(bpi_dictionary[:ville]).nil? && object.try(bpi_dictionary[:ville]).is_a?(Hash) then
         object.send bpi_dictionary[:ville][:ville]
       end
 		else
