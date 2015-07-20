@@ -125,12 +125,13 @@ config.bpi.dictionary = {
 If some of your attributes are in a hash, the dictionary
 will do the job too. Let's say your impacts are in a hash named impacts :
 
+```ruby
 config.bpi.dictionary = {
   .
   .
   impact_eco: :impacts,
-  impact_social :impacts,
-  impact_culturel :impacts
+  impact_social: :impacts,
+  impact_culturel: :impacts
   .
   .
 }
