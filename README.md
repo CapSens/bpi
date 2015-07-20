@@ -78,18 +78,21 @@ Note that your project cannot have more than two impacts, but must have a least 
 * categorie2 (optional)
 * mots_cles_nomenclature_operateur (optional) : key words
 * mode_financement (mandatory) : DON, DOC, PRE, PRR, ACT, OBL
+```
 DON => Don sans contrepartie
 DOC => Don avec contrepartie
 PRE => Prêt non rémunéré
 PRR => Prêt rémunéré
 ACT => Actions
 OBL => Obligations
-
+```
 * type_porteur_projet (mandatory) : ENT, ASS, PAR, COL
+```
 ENT => Entreprise
 ASS => Association
 PAR => Particulier
 COL => Collectivités locales
+```
 * qualif_ESS (mandatory) : OUI / NON
 * code_postal (mandatory)
 * ville (optional)
