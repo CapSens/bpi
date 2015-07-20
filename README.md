@@ -21,14 +21,14 @@ include Bpi
 .
 .
 def history
-  @projects = xml_history_builder(YourProjectModel.all)
+  @projects = xml_builder(YourProjectModel.all, "history")
   send_data @projects.to_xml,
     :type => "text/xml; charset=UTF-8;",
     :disposition => "attachement; filename=#{Rails.application.config.bpi.reference_partenaire}_historique.xml"
 end
 
 def current
-  @projects = xml_current_builder(YourProjectModel.all)
+  @projects = xml_builder(YourProjectModel.all, "current")
   send_data @projects.to_xml,
     :type => "text/xml; charset=UTF-8;",
     :disposition => "attachement; filename=#{Rails.application.config.bpi.reference_partenaire}.xml"
@@ -119,6 +119,20 @@ config.bpi.dictionary = {
   code_postal: :zip_code,
   time_ended?: :time_ended?,
   accept?: :accept?
+}
+```
+
+If some of your attributes are in a hash, the dictionary
+will do the job too. Let's say your impacts are in a hash named impacts :
+
+config.bpi.dictionary = {
+  .
+  .
+  impact_eco: :impacts,
+  impact_social :impacts,
+  impact_culturel :impacts
+  .
+  .
 }
 ```
 
