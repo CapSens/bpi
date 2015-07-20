@@ -153,3 +153,35 @@ config.bpi.impact_eco = 'OUI'
 .
 .
 ```
+
+## Categories
+
+Here is the table of categories and there corresponding code.
+
+**Social**
+  01	Enfance / Education
+	02	Dépendance et Exclusion
+	03	Santé - Bien-être - Sport
+	04	Solidarité
+
+**Economie**
+  21	Technologie
+	22	Commerce - Service (de proximité)
+	23	Industrie
+	24	Immobilier
+
+**Environnement**
+  41	Alimentation
+	42	Biodiversité
+	43	Energies Renouvelables
+	44	Transport - Ville Durable
+
+**Culture**
+  61	Musique
+	62	Vidéo - Cinéma - Photo
+	63	Multimédia - Jeux
+	64	Spectacle Vivant
+	65	Mode - Design
+	66	Edition - Journalisme
+	67	Cuisine
+	68	Beaux Arts et Patrimoine
