@@ -141,15 +141,23 @@ config.bpi.dictionary = {
 ```
 
 If one of the attributes is not present in your database (and thus cannot put it in the dictionary) like above,
-you can set it manually like this :
+you can set it manually in the default hash :
 
 ```ruby
 .
 .
-config.bpi.impact_social = 'NON'
-config.bpi.impact_environnemental = 'OUI'
-config.bpi.impact_culturel = 'NON'
-config.bpi.impact_eco = 'OUI'
+config.bpi.default = {
+  'impact_social' => "NON",
+  'impact_environnemental' => "OUI",
+  'impact_culturel' => "NON",
+  'impact_eco' => "OUI",
+  'categorie1' => "22",
+  'categorie2' => "41",
+  'mode_financement' => "DOC",
+  'type_porteur_projet' => "PAR",
+  'qualif_ESS' => "NON",
+  'url_historique' => "026_historique"
+}
 .
 .
 ```
