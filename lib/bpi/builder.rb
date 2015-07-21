@@ -17,7 +17,7 @@ module Bpi
 		  xml.partenaire {
 				objects.map do |object|
 					data = object.get_project_data
-					if xml_stream == "history" && object.try(bpi_dictionary[:accept?]) == true
+					if xml_stream == "history" && object.try(bpi_dictionary['accept?']) == true
 			    	xml.projet {
 			    		xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 			    		xml.date_export Time.now.strftime("%Y-%m-%d")
@@ -48,7 +48,7 @@ module Bpi
 			  			xml.montant_recherche object.send bpi_dictionary['montant_recherche']
 			  			xml.montant_collecte object.send bpi_dictionary['montant_collecte']
 						}
-					elsif xml_stream == "current" && object.try(bpi_dictionary[:time_ended?]) == false
+					elsif xml_stream == "current" && object.try(bpi_dictionary['time_ended?']) == false
 						xml.projet {
 				    	xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 				    	xml.date_export Time.now.strftime("%Y-%m-%d")
