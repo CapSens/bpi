@@ -4,8 +4,8 @@ module Bpi
     if !bpi_dictionary.has_key?(key)
       bpi_default[key]
     elsif object.bpi_dictionary[key].is_a? Hash
-      # object.send(hash.keys.first).send(hash.keys.first)
-      object.send(hash.fetch(key).values.first)
+      # {loc: :localisation}
+      object.send(bpi_dictionary[key].keys.first).send(bpi_dictionary[key].values.first)
     else !object.bpi_dictionary[key].is_a? Hash
       object.send bpi_dictionary[key]
     end
