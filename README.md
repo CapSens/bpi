@@ -111,30 +111,27 @@ For instance, Fundovino uses the dictionary below
 
 ```ruby
 config.bpi.dictionary = {
-  reference_projet: :id,
-  titre: :title_fr,
-  ville: :localisation,
-  description: :presentation,
-  date_debut_collecte: :created_at,
-  date_fin_collecte: :end_date,
-  montant_recherche: :amount,
-  montant_collecte: :collected_amount,
-  code_postal: :zip_code,
-  time_ended?: :time_ended?,
-  accept?: :accept?
+  'reference_projet' => :id,
+  'titre' => :title_fr,
+  'ville' => :localisation,
+  'description' => :presentation,
+  'date_debut_collecte' => :created_at,
+  'date_fin_collecte' => :end_date,
+  'montant_recherche' => :amount,
+  'montant_collecte' => :collected_amount,
+  'code_postal' => :zip_code,
+  'time_ended?' => :time_ended?,
+  'accept?' => :accept?
 }
 ```
 
-If some of your attributes are in a hash, the dictionary
-will do the job too. Let's say your impacts are in a hash named impacts :
+It also works with attributes in nested hashes, for instance :
 
 ```ruby
 config.bpi.dictionary = {
   .
   .
-  impact_eco: :impacts,
-  impact_social: :impacts,
-  impact_culturel: :impacts
+  'ville' => localisation: :city,
   .
   .
 }
