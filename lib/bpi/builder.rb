@@ -66,7 +66,7 @@ module Bpi
 							xml.mots_cles_nomenclature_operateur get_tag(object, 'mots_cles_op') unless get_tag(object, 'mots_cles_op').nil?
 							xml.mode_financement get_tag(object, 'mode_financement')
 							xml.qualif_ESS get_tag(object, 'qualif_ESS')
-							xml.code_postal object.send bpi_dictionary['code_postal']
+							xml.code_postal object.send(bpi_dictionary['code_postal']) unless object.send(bpi_dictionary['code_postal']).empty?
 				  		xml.ville object.send bpi_dictionary['ville']
 				  		xml.titre object.send bpi_dictionary['titre']
 				  		xml.description object.send(bpi_dictionary['description']).gsub(/<\/?[^>]*>/,"")
