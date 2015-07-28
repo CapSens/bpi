@@ -6,7 +6,7 @@ module Bpi
     elsif object.bpi_dictionary[key].is_a? Hash
       # {loc: :localisation}
       object.send(bpi_dictionary[key].keys.first).send(bpi_dictionary[key].values.first)
-    else !object.bpi_dictionary[key].is_a? Hash
+    else
       object.send bpi_dictionary[key]
     end
   end
