@@ -38,7 +38,7 @@ module Bpi
 							xml.code_postal object.send bpi_dictionary['code_postal']
 			  			xml.ville object.send bpi_dictionary['ville']
 			  			xml.titre object.send bpi_dictionary['titre']
-			  			xml.description object.send(bpi_dictionary['description']).gsub(/<\/?[^>]*>/,"")
+			  			xml.description object.send(bpi_dictionary['description']).gsub(/<\/?[^>]*>/,"") unless object.try(bpi_dictionary['description']).nil?
 			  			xml.url data[:url]
 			  			xml.url_photo data[:photo]
 			  			fullstart = object.send bpi_dictionary['date_debut_collecte']
@@ -69,7 +69,7 @@ module Bpi
 							xml.code_postal object.send(bpi_dictionary['code_postal']) unless object.send(bpi_dictionary['code_postal']).empty?
 				  		xml.ville object.send bpi_dictionary['ville']
 				  		xml.titre object.send bpi_dictionary['titre']
-				  		xml.description object.send(bpi_dictionary['description']).gsub(/<\/?[^>]*>/,"")
+				  		xml.description object.send(bpi_dictionary['description']).gsub(/<\/?[^>]*>/,"") unless object.try(bpi_dictionary['description']).nil?
 				  		xml.url data[:url]
 				  		xml.url_photo data[:photo]
 				  		fullstart = object.send bpi_dictionary['date_debut_collecte']
