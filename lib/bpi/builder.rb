@@ -89,6 +89,6 @@ module Bpi
 				end
 		  }
 		end
+		builder.encoding = 'utf-8'
 	end
-	builder.encoding = 'utf-8'
 end
