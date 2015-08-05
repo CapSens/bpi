@@ -13,7 +13,7 @@ module Bpi
 	# - current : XML stream of ongoing projects
 
 	def xml_builder(objects, xml_stream)
-		builder = Nokogiri::XML::Builder.new do |xml|
+		builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
 		  xml.partenaire {
 				objects.map do |object|
 					begin
@@ -89,6 +89,5 @@ module Bpi
 				end
 		  }
 		end
-		builder.encoding = 'utf-8'
 	end
 end
