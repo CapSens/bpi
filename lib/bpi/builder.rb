@@ -18,7 +18,7 @@ module Bpi
 				objects.map do |object|
 					begin
 						data = object.get_project_data
-						if xml_stream == "history" && (object.accept? || object.success? || object.failure?)
+						if xml_stream == "history" && (object.success? || object.failure?)
 				    	xml.projet {
 				    		xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 				    		xml.date_export Time.now.strftime("%Y-%m-%d")
