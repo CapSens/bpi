@@ -18,7 +18,7 @@ module Bpi
 				objects.map do |object|
 					begin
 						data = object.get_project_data
-						if xml_stream == "history" && object.try(bpi_dictionary['accept?']) == true
+						if xml_stream == "history" && (object.accept? || object.success? || object.failure?)
 				    	xml.projet {
 				    		xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 				    		xml.date_export Time.now.strftime("%Y-%m-%d")
@@ -39,7 +39,7 @@ module Bpi
 								xml.code_postal object.send bpi_dictionary['code_postal']
 				  			xml.ville object.send bpi_dictionary['ville']
 				  			xml.titre object.send bpi_dictionary['titre']
-				  			xml.description object.send(bpi_dictionary['description']).gsub(/<\/?[^>]*>/,"").encode("iso-8859-1").force_encoding("utf-8") unless object.try(bpi_dictionary['description']).nil?
+				  			xml.description get_presentation(object).gsub(/<\/?[^>]*>/,"")
 				  			xml.url data[:url]
 				  			xml.url_photo data[:photo]
 				  			fullstart = object.send bpi_dictionary['date_debut_collecte']
@@ -70,7 +70,7 @@ module Bpi
 								xml.code_postal object.send(bpi_dictionary['code_postal']) unless object.send(bpi_dictionary['code_postal']).empty?
 					  		xml.ville object.send bpi_dictionary['ville']
 					  		xml.titre object.send bpi_dictionary['titre']
-					  		xml.description object.send(bpi_dictionary['description']).gsub(/<\/?[^>]*>/,"").encode("iso-8859-1").force_encoding("utf-8") unless object.try(bpi_dictionary['description']).nil?
+					  		xml.description get_presentation(object).gsub(/<\/?[^>]*>/,"")
 					  		xml.url data[:url]
 					  		xml.url_photo data[:photo]
 					  		fullstart = object.send bpi_dictionary['date_debut_collecte']

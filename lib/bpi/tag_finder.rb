@@ -11,4 +11,8 @@ module Bpi
     end
   end
 
+  def get_presentation(object)
+    object.send(bpi_dictionary['description']).first.presentation
+  end
+
 end
