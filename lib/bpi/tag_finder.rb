@@ -10,9 +10,4 @@ module Bpi
       object.send bpi_dictionary[key]
     end
   end
-
-  def get_presentation(object)
-    object.send(bpi_dictionary['description']).first.presentation
-  end
-
 end

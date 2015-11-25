@@ -13,12 +13,12 @@ module Bpi
 	# - current : XML stream of ongoing projects
 
 	def xml_builder(objects, xml_stream)
-		builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
+		builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
 		  xml.partenaire {
 				objects.map do |object|
 					begin
 						data = object.get_project_data
-						if xml_stream == "history" && (object.success? || object.failure?)
+						if xml_stream == "history" && (object.try(bpi_dictionary['success?']) || object.try(bpi_dictionary['failure?']))
 				    	xml.projet {
 				    		xml.reference_partenaire Rails.application.config.bpi.reference_partenaire
 				    		xml.date_export Time.now.strftime("%Y-%m-%d")
@@ -40,13 +40,11 @@ module Bpi
 								xml.code_postal object.send bpi_dictionary['code_postal']
 				  			xml.ville object.send bpi_dictionary['ville']
 				  			xml.titre object.send bpi_dictionary['titre']
-				  			xml.description get_presentation(object).gsub(/<\/?[^>]*>/,"")
+				  			xml.description sanitize(get_tag(object, 'description')).gsub('&#13;', '')
 				  			xml.url data[:url]
 				  			xml.url_photo data[:photo]
-				  			fullstart = object.send bpi_dictionary['date_debut_collecte']
-				  			xml.date_debut_collecte fullstart.strftime("%F")
-				  			fullend = object.send bpi_dictionary['date_fin_collecte']
-				  			xml.date_fin_collecte fullend.strftime("%F")
+				  			xml.date_debut_collecte object.send(bpi_dictionary['date_debut_collecte']).strftime("%F")
+				  			xml.date_fin_collecte object.send(bpi_dictionary['date_fin_collecte']).strftime("%F")
 				  			xml.montant_recherche object.send bpi_dictionary['montant_recherche']
 				  			xml.montant_collecte object.send bpi_dictionary['montant_collecte']
 							}
@@ -72,13 +70,11 @@ module Bpi
 								xml.code_postal object.send(bpi_dictionary['code_postal']) unless object.send(bpi_dictionary['code_postal']).empty?
 					  		xml.ville object.send bpi_dictionary['ville']
 					  		xml.titre object.send bpi_dictionary['titre']
-					  		xml.description get_presentation(object).gsub(/<\/?[^>]*>/,"")
+					  		xml.description sanitize(get_tag(object, 'description')).gsub('&#13;', '')
 					  		xml.url data[:url]
 					  		xml.url_photo data[:photo]
-					  		fullstart = object.send bpi_dictionary['date_debut_collecte']
-					  		xml.date_debut_collecte fullstart.strftime("%F")
-					  		fullend = object.send bpi_dictionary['date_fin_collecte']
-					  		xml.date_fin_collecte fullend.strftime("%F")
+					  		xml.date_debut_collecte object.send(bpi_dictionary['date_debut_collecte']).strftime("%F")
+					  		xml.date_fin_collecte object.send(bpi_dictionary['date_fin_collecte']).strftime("%F")
 					  		xml.montant_recherche object.send bpi_dictionary['montant_recherche']
 					  		xml.montant_collecte object.send bpi_dictionary['montant_collecte']
 							}

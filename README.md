@@ -21,17 +21,17 @@ include Bpi
 .
 .
 def history
-  @projects = xml_builder(YourProjectModel.all, "history")
+  @projects = xml_builder(Project.all, "history")
   send_data @projects.to_xml,
     :type => "text/xml; charset=UTF-8;",
     :disposition => "attachement; filename=#{Rails.application.config.bpi.reference_partenaire}_historique.xml"
 end
 
 def current
-  @projects = xml_builder(YourProjectModel.all, "current")
+  @projects = xml_builder(Project.all, "current")
   send_data @projects.to_xml,
     :type => "text/xml; charset=UTF-8;",
-    :disposition => "attachement; filename=#{Rails.application.config.bpi.reference_partenaire}.xml"
+    :disposition => "inline; filename=#{Rails.application.config.bpi.reference_partenaire}.xml"
 end
 ```
 
@@ -106,6 +106,8 @@ COL => Collectivités locales
 * montant_collecte (mandatory)
 * time_ended? : your method that checks if the project has ended
 * accept? : your method that checks if the project has been accepted
+* success? : your method that checks if the project collect was a success
+* failure? : your method that checks if the project collect was a failure
 
 For instance, Fundovino uses the dictionary below
 
@@ -122,6 +124,8 @@ config.bpi.dictionary = {
   'code_postal' => :zip_code,
   'time_ended?' => :time_ended?,
   'accept?' => :accept?
+  'success?' => :success?
+  'failure' => :failure?
 }
 ```
 
