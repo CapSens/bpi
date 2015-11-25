@@ -37,10 +37,10 @@ module Bpi
 								xml.mode_financement get_tag(object, 'mode_financement')
 								xml.type_porteur_projet get_tag(object, "type_porteur_projet")
 								xml.qualif_ESS get_tag(object, "qualif_ESS")
-								xml.code_postal object.send bpi_dictionary['code_postal']
-				  			xml.ville object.send bpi_dictionary['ville']
+								xml.code_postal get_tag(object, "code_postal")
+				  			xml.ville get_tag(object, "ville")
 				  			xml.titre object.send bpi_dictionary['titre']
-				  			xml.description sanitize(get_tag(object, 'description')).gsub('&#13;', '')
+				  			xml.description get_tag(object, 'description').gsub(/<\/?[^>]*>/,"")
 				  			xml.url data[:url]
 				  			xml.url_photo data[:photo]
 				  			xml.date_debut_collecte object.send(bpi_dictionary['date_debut_collecte']).strftime("%F")
@@ -70,7 +70,7 @@ module Bpi
 								xml.code_postal object.send(bpi_dictionary['code_postal']) unless object.send(bpi_dictionary['code_postal']).empty?
 					  		xml.ville object.send bpi_dictionary['ville']
 					  		xml.titre object.send bpi_dictionary['titre']
-					  		xml.description sanitize(get_tag(object, 'description')).gsub('&#13;', '')
+					  		xml.description get_tag(object, 'description').gsub(/<\/?[^>]*>/,"")
 					  		xml.url data[:url]
 					  		xml.url_photo data[:photo]
 					  		xml.date_debut_collecte object.send(bpi_dictionary['date_debut_collecte']).strftime("%F")
@@ -79,10 +79,6 @@ module Bpi
 					  		xml.montant_collecte object.send bpi_dictionary['montant_collecte']
 							}
 						end
-					rescue Exception => exception
-						Rails.logger.warn("--------------An error occured in BPI PLUGIN-----------")
-						Rails.logger.warn (exception)
-						Rails.logger.warn("--------------------------------------------------------")
 					end
 				end
 		  }
