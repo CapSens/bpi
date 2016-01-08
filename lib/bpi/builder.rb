@@ -45,8 +45,8 @@ module Bpi
 				  			xml.url_photo data[:photo]
 				  			xml.date_debut_collecte object.send(bpi_dictionary['date_debut_collecte']).strftime("%F")
 				  			xml.date_fin_collecte object.send(bpi_dictionary['date_fin_collecte']).strftime("%F")
-				  			xml.montant_recherche object.send bpi_dictionary['montant_recherche']
-				  			xml.montant_collecte object.send bpi_dictionary['montant_collecte']
+				  			xml.montant_recherche (object.send bpi_dictionary['montant_recherche']).to_i
+				  			xml.montant_collecte (object.send bpi_dictionary['montant_collecte']).to_i
 							}
 						elsif xml_stream == "current" && object.try(bpi_dictionary['time_ended?']) == false
 							xml.projet {
@@ -75,8 +75,8 @@ module Bpi
 					  		xml.url_photo data[:photo]
 					  		xml.date_debut_collecte object.send(bpi_dictionary['date_debut_collecte']).strftime("%F")
 					  		xml.date_fin_collecte object.send(bpi_dictionary['date_fin_collecte']).strftime("%F")
-					  		xml.montant_recherche object.send bpi_dictionary['montant_recherche']
-					  		xml.montant_collecte object.send bpi_dictionary['montant_collecte']
+					  		xml.montant_recherche (object.send bpi_dictionary['montant_recherche']).to_i
+					  		xml.montant_collecte (object.send bpi_dictionary['montant_collecte']).to_i
 							}
 						end
 					end
